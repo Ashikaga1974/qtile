@@ -196,6 +196,10 @@ def init_widgets_list():
                         filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e dolphin')}
                         ),
 
+                    widget.Image(
+                        filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("/home/sascha/xmenu/xmenu.sh")}
+                        ),
+
                     #3
                     widget.GroupBox(hide_unused = False, highlight_method = 'border', font = 'Source Code Pro Bold'),
 
