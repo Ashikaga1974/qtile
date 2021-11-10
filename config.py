@@ -200,6 +200,10 @@ def init_widgets_list():
                         filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("/home/sascha/xmenu/xmenu.sh")}
                         ),
 
+                    widget.Image(
+                        filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("jgmenu_run")}
+                        ),
+
                     #3
                     widget.GroupBox(hide_unused = False, highlight_method = 'border', font = 'Source Code Pro Bold'),
 
