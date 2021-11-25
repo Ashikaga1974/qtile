@@ -24,18 +24,24 @@ def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.call([home])
 
-#@hook.subscribe.client_new
-#def client_new(client):
-#    if client.name == 'Mozilla Firefox':
-#       client.togroup('2_WEB')
+@hook.subscribe.client_new
+def client_new(client):
+    logger.warning(client.window.get_wm_class()[0] == 'kate')
+    if client.name == 'Mozilla Firefox':
+       client.togroup('2_WEB')
+    if client.window.get_wm_class()[0] == 'kate':
+       client.togroup('3_DEV')
+    if client.window.get_wm_class()[0] == 'code-oss':
+       client.togroup('3_DEV')
+
 #    if client.name == 'Unbenannt - Kate':
 #       client.togroup('3_DEV')
 #    if client.name == 'Sascha-KDE — Konsole':
 #       client.togroup('4_TERM')
 
 ### Globale Variablen
-mod = "mod4"
-alt = "mod1"
+mod = "mod1"
+alt = "mod4"
 terminal = "konsole" #guess_terminal()
 
 ### Keymapping
@@ -98,8 +104,8 @@ keys = [
 group_names = [     ("1_ALL", {'layout': 'columns'}),
                     ("2_WEB", {'layout': 'columns'}),
                     ("3_DEV", {'layout': 'columns'}),
-                    ("4_TERM", {'layout': 'columns'}),
-                    ("5_SONS", {'layout': 'columns'})
+                    ("4_TER", {'layout': 'columns'}),
+                    ("5_ETC", {'layout': 'columns'})
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -119,7 +125,7 @@ colors = [
                     ["#74438f", "#74438f"], # 4 border line color for 'other tabs' and color for 'odd widgets'
                     ["#4f76c7", "#4f76c7"], # 5 color for the 'even widgets'
                     ["#e1acff", "#e1acff"], # 6 window name
-                    ["#ecbbfb", "#ecbbfb"],  # 7 backbround for inactive screens
+                    ["#ecbbfb", "#ecbbfb"], # 7 backbround for inactive screens
                     ["#fefe22", "#fefe22"]  # 8 yellow
 ]
 
@@ -192,14 +198,6 @@ def init_widgets_list():
                     widget.CurrentLayoutIcon(scale = .80),
 
                     #2
-                    widget.Image(
-                        filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e dolphin')}
-                        ),
-
-                    widget.Image(
-                        filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("/home/sascha/xmenu/xmenu.sh")}
-                        ),
-
                     widget.Image(
                         filename = "~/.config/qtile/icons/start-menu-win11.png", scale = "false", mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("jgmenu_run")}
                         ),
